@@ -23,7 +23,6 @@ import yappi
 
 log=core.getLogger()
 
- 
 class Profiler:
     
   def __init__(self,sorttypeyappi,sortorderyappi,limityappi):
@@ -37,7 +36,7 @@ class Profiler:
     yappi.stop()
     stats = yappi.get_stats(self.sorttypeyappi,self.sortorderyappi,self.limityappi)
     for s in stats.func_stats:
-      log.debug('%s was called %s times, ttotal %s, tsub %s0',s.name,s.ncall,s.ttot,s.tsub)
+      log.info('%s was called %s times, ttotal %s, tsub %s0',s.name,s.ncall,s.ttot,s.tsub)
 
 def launch (sorttype='',sortorder='',limit=-1):
     
@@ -48,13 +47,13 @@ def launch (sorttype='',sortorder='',limit=-1):
         sorttypeyappi= yappi.SORTTYPE_NCALL
     elif (sorttype=='TTOTAL'):
         sorttypeyappi= yappi.SORTTYPE_TTOTAL
-    elif (sorttype=='SORTTYPE_TSUB'):
+    elif (sorttype=='TSUB'):
         sorttypeyappi= yappi.SORTTYPE_TSUB
-    elif (sorttype=='SORTTYPE_TAVG'):
+    elif (sorttype=='TAVG'):
         sorttypeyappi= yappi.SORTTYPE_TAVG
     else:
         #default
-        sorttypeyappi= yappi.SORTTYPE_TTOTAL      
+        sorttypeyappi= yappi.SORTTYPE_TAVG      
  
     #set sortorder
     if(sortorder=='ASC'):
