@@ -46,6 +46,7 @@ def launch (sorttype='',sortorder='',limit=-1):
     elif (sorttype=='NCALL'):
         sorttypeyappi= yappi.SORTTYPE_NCALL
     elif (sorttype=='TTOTAL'):
+	#TODO: there's currently still an issue with TTOTAL
         sorttypeyappi= yappi.SORTTYPE_TTOTAL
     elif (sorttype=='TSUB'):
         sorttypeyappi= yappi.SORTTYPE_TSUB
