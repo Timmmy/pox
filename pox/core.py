@@ -258,6 +258,14 @@ class POXCore (EventMixin):
     """
     Shut down POX.
     """
+    #Added to finish yappi
+    try:
+      prof=core.components['profiler']
+    except:
+      pass
+    else:
+      prof.finish()
+    
     import threading
     if threading.current_thread() is self.scheduler._thread:
       t = threading.Thread(target=self._quit)
