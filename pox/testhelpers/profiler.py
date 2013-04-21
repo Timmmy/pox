@@ -30,7 +30,7 @@ class Profiler:
       self.sorttypeyappi=sorttypeyappi
       self.sortorderyappi=sortorderyappi
       self.limityappi=limityappi
-    
+      core.addListenerByName('GoingDownEvent',handle_going_down)
     
   def finish(self):
     yappi.stop()
@@ -39,7 +39,7 @@ class Profiler:
       log.info('%s was called %s times, ttotal %s, tsub %s0',s.name,s.ncall,s.ttot,s.tsub)
 
 def launch (sorttype='',sortorder='',limit=-1):
-    
+
     #set sorttype (see yapi wiki for more information)
     if (sorttype=='NAME'):
         sorttypeyappi= yappi.SORTTYPE_NAME
@@ -74,3 +74,6 @@ def launch (sorttype='',sortorder='',limit=-1):
         core.register("profiler",Profiler(sorttypeyappi,sortorderyappi,limityappi))
     log.debug('Yappi is running')
         
+def handle_going_down(event):
+    profiler=core.components['profiler']
+    profiler.finish()
